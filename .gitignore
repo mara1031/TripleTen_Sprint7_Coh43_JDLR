@@ -205,3 +205,12 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+# Marimo is a data science notebook platform.
+# The `.maromoignore` file specifies files/directories to exclude from Marimo's processing
+# and is similar to `.gitignore`. It is recommended to include this file in version control
+# to ensure consistent behavior across different environments.
+
+.DS_store
+# macOS specific file that stores custom attributes of a file or folder.
+# It is recommended to include this file in version control to ensure consistent behavior
+# across different environments.
