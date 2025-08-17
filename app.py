@@ -2,21 +2,36 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 
-st.header('Análisis de ventas de vehículos usados') # título de la aplicación
+# título de la aplicación
+st.header('Análisis Vehículos Usados')
 
-car_data = pd.read_csv('vehicles_us.csv') # leer los datos
+# cargar los datos con caché para optimizar el rendimiento  
+@st.cache_data
+def load_data():
+    return pd.read_csv('vehicles_us.csv') 
 
-hist_button = st.button('Construir histograma') # crear un botón
+car_data = load_data()
+
+# Sección organizada con expanders
+with st.expander("Acerca de esta app"):
+    st.write("""
+    Explora el dataset de vehículos usados. 
+    Genera visualizaciones con los botones siguientes.
+    """)
+
+hist_button = st.button('Histograma (Millaje)') # crear un botón
      
 if hist_button: # al hacer clic en el botón
-    # escribir un mensaje
-    st.write('Creación de un histograma para el conjunto de datos de anuncios de venta de vehículos usados')
-         
+   
+    st.write('Distribución de millaje de los vehículos')
+
     # crear un histograma
-    fig = px.histogram(car_data, x="odometer")
+    fig = px.histogram(car_data, x="odometer",
+                       title="Millaje de Vehículos Usados") # Título del gráfico
      
     # mostrar un gráfico Plotly interactivo
     st.plotly_chart(fig, use_container_width=True)
+
 
 # crear una casilla de verificación
 build_lineplot = st.checkbox('Construir evolución precio promedio por día')
